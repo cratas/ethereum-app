@@ -21,6 +21,7 @@ export const SettingsExpander = ({ changeTheme }: SettingsExpanderProps) => {
         p: 0.9,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
+        zIndex: 10000
       }}
       onClick={() => {
         changeTheme();

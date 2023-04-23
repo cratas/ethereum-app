@@ -1,40 +1,65 @@
-import { ThemeMode } from "../types";
 import { PaletteMode } from "@mui/material";
+import { ThemeMode } from "../types";
 
-const lightPalette = {
-  mode: "light" as PaletteMode,
-  primary: {
-    main: "#ffffff",
-  },
-  secondary: {
-    main: "#000000",
-  },
-  background: {
-    default: "#ffffff",
-  },
-};
-
-const darkPalette = {
-  mode: "dark" as PaletteMode,
-  primary: {
-    main: "#000000",
-  },
-  secondary: {
-    main: "#ffffff",
-  },
-  background: {
-    default: "#000000",
-  },
-};
-
-export const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
+const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
   palette: {
-    ...(mode === ThemeMode.LIGHT ? lightPalette : darkPalette),
+    mode,
+    ...(mode === ThemeMode.LIGHT
+      ? {
+          primary: {
+            main: "#fff",
+          },
+          secondary: {
+            main: "#000",
+          },
+          background: {
+            default: "#fff",
+          },
+        }
+      : {
+          primary: {
+            main: "#000",
+          },
+          secondary: {
+            main: "#fff",
+          },
+          background: {
+            default: "#000",
+          },
+        }),
   },
   typography: {
-    fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
   },
 });
 
+const { palette } = getPalette();
 
+const customTheme = {
+  components: {
+    MuButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+          color: palette.primary.main,
+          backgroundColor: palette.secondary.main,
+        },
+      },
+    },
+  },
+};
 
+export { getPalette };
+
+export default customTheme;

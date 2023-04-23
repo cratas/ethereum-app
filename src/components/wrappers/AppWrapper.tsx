@@ -1,12 +1,23 @@
+import { Container } from "@material-ui/core";
 import { Box } from "@mui/material";
 import React from "react";
 
-export const AppWrapper = () => {
+interface AppWrapperProps {
+  children: React.ReactNode;
+}
+
+export const AppWrapper = ({ children }: AppWrapperProps) => {
   return (
     <Box
-      sx={{ width: "100vw", height: "100vh", backgroundColor: "primary.main" }}
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        backgroundColor: "primary.main",
+      }}
     >
-      {/* Your app content goes here */}
+      <Container maxWidth="lg" >
+        <Box sx={{ minHeight: "95vh", pt: 2 }}>{children}</Box>
+      </Container>
     </Box>
   );
 };
