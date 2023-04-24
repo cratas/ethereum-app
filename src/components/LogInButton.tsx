@@ -9,10 +9,10 @@ const LogInButton = () => {
     <Button
       variant="contained"
       sx={{
-        backgroundColor: "secondary.main",
+        bgcolor: "secondary.main",
         color: "primary.main",
         "&:hover": {
-          backgroundColor: "primary.main",
+          bgcolor: "primary.main",
           color: "secondary.main",
         },
       }}

@@ -17,7 +17,7 @@ export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
       sx={{
         width: "100%",
         height: "100vh",
-        backgroundColor: "primary.main",
+        bgcolor: "primary.main",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -28,7 +28,7 @@ export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
           maxWidth: "40rem",
           gap: 4,
           p: 3,
-          backgroundColor: "primary.main",
+          bgcolor: "primary.main",
           border: "2px solid black",
           borderColor: "secondary.main",
           borderRadius: 2,
@@ -54,7 +54,7 @@ export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
         
           variant="contained"
           sx={{
-            backgroundColor: "secondary.main",
+            bgcolor: "secondary.main",
             color: "primary.main",
             mt: 3,
           }}

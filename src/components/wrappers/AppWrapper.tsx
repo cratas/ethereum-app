@@ -12,7 +12,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        backgroundColor: "primary.main",
+        bgcolor: "primary.main",
       }}
     >
       <Container maxWidth="lg">

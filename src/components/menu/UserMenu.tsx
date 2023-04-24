@@ -10,6 +10,7 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import LogInButton from "../LogInButton";
 import { useLogUser } from "../../hooks/useLogUser";
+import { hideModal, showProfileModal } from "../../redux/modalsSlice";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -19,17 +20,27 @@ export const UserMenu = () => {
   const loggedUser = useSelector(selectLoggedUser);
   const { address, balance } = loggedUser ?? {};
 
+  const handleProfileClick = () => {
+    dispatch(
+      showProfileModal({
+        title: "Profile details",
+        contentMessage: "some",
+      })
+    );
+    handleClose();
+  };
+
+  const handleLogOutClick = () => {
+    dispatch(setLoggedUser(null));
+    handleClose();
+  };
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleLogOutClick = () => {
-    dispatch(setLoggedUser(null));
-    handleClose();
   };
 
   return (
@@ -80,7 +91,7 @@ export const UserMenu = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
-              sx={{ ml: 1, p: 0.9, backgroundColor: "secondary.main" }}
+              sx={{ ml: 1.5, p: 0.9, bgcolor: "secondary.main" }}
             >
               <img src={metamaskLogo} alt="Logo" width={30} />
             </IconButton>
@@ -101,7 +112,7 @@ export const UserMenu = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
             <MenuItem onClick={login}>Relog</MenuItem>
             <MenuItem onClick={handleLogOutClick}>Log out</MenuItem>
           </Menu>

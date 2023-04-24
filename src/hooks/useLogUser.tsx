@@ -18,11 +18,24 @@ export const useLogUser = () => {
       );
       const user = provider.getSigner();
 
-      const address = await user.getAddress();
       const bigNumberishNumber = await user.getBalance();
-      const balance = bigNumberishToNumber(bigNumberishNumber);
+      const bigNumberishGasPrice = await user.getGasPrice();
 
-      dispatch(setLoggedUser({ address, balance }));
+      const address = await user.getAddress();
+      const balance = bigNumberishToNumber(bigNumberishNumber);
+      const transactionsCount = await user.getTransactionCount();
+      const chainId = await user.getChainId();
+      const gasPrice = bigNumberishToNumber(bigNumberishGasPrice);
+
+      dispatch(
+        setLoggedUser({
+          address,
+          balance,
+          chainId,
+          transactionsCount,
+          gasPrice,
+        })
+      );
       dispatch(setCurrentLocation(Locations.PROJECTS));
     } catch (error) {
       console.error(error);

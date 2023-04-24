@@ -53,7 +53,7 @@ const customTheme = {
         root: {
           textTransform: "none",
           color: palette.primary.main,
-          backgroundColor: palette.secondary.main,
+          bgcolor: palette.secondary.main,
         },
       },
     },
