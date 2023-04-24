@@ -4,17 +4,36 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser, setLoggedUser } from "../../redux/loggedUserSlice";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import { setCurrentLocation } from "../../redux/currentLocationSlice";
-import { Locations } from "../../types";
+import LogInButton from "../LogInButton";
+import { useLogUser } from "../../hooks/useLogUser";
+import { hideModal, showProfileModal } from "../../redux/modalsSlice";
 
 export const UserMenu = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { loggedUser } = useSelector(selectLoggedUser);
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { login } = useLogUser();
+
+  const loggedUser = useSelector(selectLoggedUser);
+  const { address, balance } = loggedUser ?? {};
+
+  const handleProfileClick = () => {
+    dispatch(
+      showProfileModal({
+        title: "Profile details",
+        contentMessage: "some",
+      })
+    );
+    handleClose();
+  };
+
+  const handleLogOutClick = () => {
+    dispatch(setLoggedUser(null));
+    handleClose();
+  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -24,19 +43,9 @@ export const UserMenu = () => {
     setAnchorEl(null);
   };
 
-  const handleLogInClick = () => {
-    dispatch(setLoggedUser("kamil"));
-    dispatch(setCurrentLocation(Locations.PROJECTS));
-  };
-
-  const handleLogOutClick = () => {
-    dispatch(setLoggedUser(null));
-    handleClose();
-  };
-
   return (
     <Box sx={{ width: "45%", textAlign: "right" }}>
-      {loggedUser ? (
+      {balance && address ? (
         <div>
           <Box
             sx={{
@@ -45,12 +54,36 @@ export const UserMenu = () => {
               justifyContent: "right",
             }}
           >
-            <Typography
-              variant="inherit"
-              sx={{ color: "secondary.main", fontWeight: "bold" }}
-            >
-              {loggedUser}
-            </Typography>
+            <Box>
+              <Typography
+                variant="inherit"
+                sx={{
+                  color: "secondary.main",
+                  fontWeight: "bold",
+                }}
+              >
+                {balance + " ETH"}
+              </Typography>
+              <Tooltip
+                title="Click to copy"
+                arrow
+                placement="left-start"
+                onClick={() => {
+                  navigator.clipboard.writeText(address);
+                }}
+              >
+                <Typography
+                  variant="inherit"
+                  sx={{
+                    color: "secondary.main",
+                    cursor: "pointer",
+                  }}
+                >
+                  {address}
+                </Typography>
+              </Tooltip>
+            </Box>
+
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -58,7 +91,7 @@ export const UserMenu = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
-              sx={{ ml: 0.5, p: 1 }}
+              sx={{ ml: 1.5, p: 0.9, bgcolor: "secondary.main" }}
             >
               <img src={metamaskLogo} alt="Logo" width={30} />
             </IconButton>
@@ -79,18 +112,13 @@ export const UserMenu = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+            <MenuItem onClick={login}>Relog</MenuItem>
             <MenuItem onClick={handleLogOutClick}>Log out</MenuItem>
           </Menu>
         </div>
       ) : (
-        <Button
-          variant="outlined"
-          sx={{ backgroundColor: "secondary.main" }}
-          onClick={handleLogInClick}
-        >
-          Log In
-        </Button>
+        <LogInButton />
       )}
     </Box>
   );

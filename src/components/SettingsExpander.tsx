@@ -17,7 +17,7 @@ export const SettingsExpander = ({ changeTheme }: SettingsExpanderProps) => {
         right: "0",
         cursor: "pointer",
         transform: "translateY(-50%)",
-        backgroundColor: "secondary.main",
+        bgcolor: "secondary.main",
         p: 0.9,
         borderTopLeftRadius: 5,
         borderBottomLeftRadius: 5,

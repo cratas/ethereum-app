@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Sections } from "./components/sections/Sections";
 import { MetaMaskChecker } from "./components/wrappers/MetaMaskChecker";
+import { ModalProvider } from "./components/wrappers/ModalProvider";
 
 const App = () => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT);
@@ -31,6 +32,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <MetaMaskChecker>
           <AppWrapper>
+            <ModalProvider />
             <Menu />
             <Sections />
           </AppWrapper>
