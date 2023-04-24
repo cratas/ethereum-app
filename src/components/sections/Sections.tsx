@@ -6,6 +6,7 @@ import { Locations } from "../../types";
 import { CreateProject } from "./CreateProject";
 import { Projects } from "./Projects";
 import { selectLoggedUser } from "../../redux/loggedUserSlice";
+import { Unauthorized } from "./Unauthorized";
 
 type Props = {};
 
@@ -26,5 +27,7 @@ export const Sections = (props: Props) => {
       {currentLocation === Locations.CREATE_PROJECT && <CreateProject />}
       {currentLocation === Locations.PROJECTS && <Projects />}
     </Box>
-  ) : null;
+  ) : (
+    <Unauthorized />
+  );
 };

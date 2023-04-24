@@ -8,7 +8,6 @@ import { Button, Tooltip } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import LogInButton from "../LogInButton";
 import { useLogUser } from "../../hooks/useLogUser";
 import { hideModal, showProfileModal } from "../../redux/modalsSlice";
 import { setSnackBar } from "../../redux/notificationsSlice";
@@ -121,7 +120,7 @@ export const UserMenu = () => {
           </Menu>
         </div>
       ) : (
-        <LogInButton />
+        null
       )}
     </Box>
   );
