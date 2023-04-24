@@ -19,8 +19,8 @@ export const SettingsExpander = ({ changeTheme }: SettingsExpanderProps) => {
         transform: "translateY(-50%)",
         backgroundColor: "secondary.main",
         p: 0.9,
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
         zIndex: 10000
       }}
       onClick={() => {
