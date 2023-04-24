@@ -15,7 +15,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
         backgroundColor: "primary.main",
       }}
     >
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg">
         <Box sx={{ minHeight: "95vh", pt: 2 }}>{children}</Box>
       </Container>
     </Box>

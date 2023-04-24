@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { User } from "../types";
 
 export interface LoggedUserState {
-  loggedUser: string | null;
+  loggedUser: User | null;
 }
 
 const initialState: LoggedUserState = {
@@ -23,6 +24,6 @@ export const currentThemeReducer = createSlice({
 
 export const { setLoggedUser } = currentThemeReducer.actions;
 
-export const selectLoggedUser = (state: RootState) => state.loggedUser;
+export const selectLoggedUser = (state: RootState) => state.loggedUser.loggedUser;
 
 export default currentThemeReducer.reducer;

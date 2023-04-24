@@ -10,9 +10,9 @@ import {
 } from "../../redux/currentLocationSlice";
 
 export const Links = () => {
-  const { loggedUser } = useSelector(selectLoggedUser);
+  const loggedUser  = useSelector(selectLoggedUser);
   const dispatch = useDispatch();
-  const { currentLocation } = useSelector(selectCurrentLocation);
+  const currentLocation = useSelector(selectCurrentLocation);
 
   return (
     <Box sx={{ width: "45%" }}>

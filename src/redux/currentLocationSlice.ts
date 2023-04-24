@@ -25,6 +25,6 @@ export const currentLocationReducer = createSlice({
 
 export const { setCurrentLocation } = currentLocationReducer.actions;
 
-export const selectCurrentLocation = (state: RootState) => state.currentLocation;
+export const selectCurrentLocation = (state: RootState) => state.currentLocation.currentLocation;
 
 export default currentLocationReducer.reducer;
