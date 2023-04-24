@@ -16,3 +16,11 @@ export enum ModalTypes {
 export const modals = {
   [ModalTypes.PROFILE]: ProfileModal,
 };
+
+
+export enum Severity {
+  ERROR = 'error',
+  INFO = 'info',
+  SUCCESS = 'success',
+  WARNING = 'warning',
+}

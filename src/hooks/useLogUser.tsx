@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { bigNumberishToNumber } from "../utils/bigIntToNumber";
 import { useDispatch } from "react-redux";
 import { setLoggedUser } from "../redux/loggedUserSlice";
 import { setCurrentLocation } from "../redux/currentLocationSlice";
-import { Locations } from "../types";
+import { Locations, Severity } from "../types";
+import { setSnackBar } from "../redux/notificationsSlice";
 
 export const useLogUser = () => {
   const dispatch = useDispatch();
@@ -37,12 +38,30 @@ export const useLogUser = () => {
         })
       );
       dispatch(setCurrentLocation(Locations.PROJECTS));
+      dispatch(
+        setSnackBar({
+          severity: "success",
+          msg: "Successfully logged in.",
+        })
+      );
     } catch (error) {
-      console.error(error);
+      dispatch(
+        setSnackBar({
+          severity: Severity.ERROR,
+          msg: "You have to login into your MetaMask extension first.",
+        })
+      );
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    let isMounted = true;
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return { isLoading, login };
 };

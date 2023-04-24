@@ -13,6 +13,7 @@ import { store } from "./redux/store";
 import { Sections } from "./components/sections/Sections";
 import { MetaMaskChecker } from "./components/wrappers/MetaMaskChecker";
 import { ModalProvider } from "./components/wrappers/ModalProvider";
+import SnackBarHandler from "./components/wrappers/SnackBarHandler";
 
 const App = () => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.LIGHT);
@@ -33,6 +34,7 @@ const App = () => {
         <MetaMaskChecker>
           <AppWrapper>
             <ModalProvider />
+            <SnackBarHandler />
             <Menu />
             <Sections />
           </AppWrapper>

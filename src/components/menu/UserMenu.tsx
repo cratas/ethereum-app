@@ -11,6 +11,8 @@ import { Typography } from "@mui/material";
 import LogInButton from "../LogInButton";
 import { useLogUser } from "../../hooks/useLogUser";
 import { hideModal, showProfileModal } from "../../redux/modalsSlice";
+import { setSnackBar } from "../../redux/notificationsSlice";
+import { Severity } from "../../types";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,7 @@ export const UserMenu = () => {
 
   const handleLogOutClick = () => {
     dispatch(setLoggedUser(null));
+    dispatch(setSnackBar({msg: "Successfully logged out.", severity: Severity.SUCCESS}))
     handleClose();
   };
 
