@@ -9,7 +9,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import MoneyOffIcon from "@mui/icons-material/MoneyOff";

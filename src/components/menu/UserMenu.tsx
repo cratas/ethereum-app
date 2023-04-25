@@ -8,9 +8,10 @@ import { Button, Tooltip } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import LogInButton from "../LogInButton";
 import { useLogUser } from "../../hooks/useLogUser";
 import { hideModal, showProfileModal } from "../../redux/modalsSlice";
+import { setSnackBar } from "../../redux/notificationsSlice";
+import { Severity } from "../../types";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export const UserMenu = () => {
 
   const handleLogOutClick = () => {
     dispatch(setLoggedUser(null));
+    dispatch(setSnackBar({msg: "Successfully logged out.", severity: Severity.SUCCESS}))
     handleClose();
   };
 
@@ -44,7 +46,7 @@ export const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ width: "45%", textAlign: "right" }}>
+    <Box sx={{ width: "45%", textAlign: "right"}}>
       {balance && address ? (
         <div>
           <Box
@@ -65,7 +67,7 @@ export const UserMenu = () => {
                 {balance + " ETH"}
               </Typography>
               <Tooltip
-                title="Click to copy"
+                title="Copy to clipboard"
                 arrow
                 placement="left-start"
                 onClick={() => {
@@ -118,7 +120,7 @@ export const UserMenu = () => {
           </Menu>
         </div>
       ) : (
-        <LogInButton />
+        null
       )}
     </Box>
   );
