@@ -56,12 +56,5 @@ export const useLogUser = () => {
     }
   };
 
-  useEffect(() => {
-    let isMounted = true;
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return { isLoading, login };
 };

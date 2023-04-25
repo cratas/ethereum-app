@@ -19,9 +19,10 @@ export const Sections = (props: Props) => {
       sx={{
         p: 3,
         border: "2px solid black",
+        borderColor: 'secondary.main',
         borderRadius: 2,
         mt: 2,
-        minHeight: "40rem",
+        minHeight: "34rem",
       }}
     >
       {currentLocation === Locations.CREATE_PROJECT && <CreateProject />}

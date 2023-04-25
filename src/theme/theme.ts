@@ -8,6 +8,7 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
       ? {
           primary: {
             main: "#fff",
+            second: "#DCDCDC",
           },
           secondary: {
             main: "#000",
@@ -19,6 +20,7 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
       : {
           primary: {
             main: "#000",
+            second: "#2F4F4F",
           },
           secondary: {
             main: "#fff",

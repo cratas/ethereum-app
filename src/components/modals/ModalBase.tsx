@@ -2,7 +2,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import {
   Dialog,
   Box,
-  DialogActions,
   DialogContent,
   Typography,
   IconButton,
@@ -44,7 +43,6 @@ export const ModalBase = ({
       <Box
         sx={{
           p: 2,
-          // maxwidth: "50rem",
         }}
       >
         <IconButton

@@ -46,7 +46,7 @@ export const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ width: "45%", textAlign: "right" }}>
+    <Box sx={{ width: "45%", textAlign: "right"}}>
       {balance && address ? (
         <div>
           <Box
@@ -67,7 +67,7 @@ export const UserMenu = () => {
                 {balance + " ETH"}
               </Typography>
               <Tooltip
-                title="Click to copy"
+                title="Copy to clipboard"
                 arrow
                 placement="left-start"
                 onClick={() => {
