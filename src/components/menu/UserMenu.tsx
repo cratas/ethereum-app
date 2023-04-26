@@ -69,7 +69,7 @@ export const UserMenu = () => {
               <Tooltip
                 title="Copy to clipboard"
                 arrow
-                placement="left-start"
+                placement="top-start"
                 onClick={() => {
                   navigator.clipboard.writeText(address);
                 }}
