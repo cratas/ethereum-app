@@ -1,6 +1,6 @@
 import React from "react";
-import { InputAdornment } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
+import { InputAdornment } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { Button, FormControl, Grid } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -33,6 +33,15 @@ export const Form = ({ onSubmit }: FormProps) => {
                 onChange={onChange}
                 error={!!error}
                 fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "secondary.main",
+                    },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "secondary.main",
+                  },
+                }}
                 helperText={error ? error.message : null}
               />
             )}
@@ -55,6 +64,15 @@ export const Form = ({ onSubmit }: FormProps) => {
                 error={!!error}
                 helperText={error ? error.message : null}
                 type="number"
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "secondary.main",
+                    },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "secondary.main",
+                  },
+                }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">ETH</InputAdornment>
@@ -84,7 +102,16 @@ export const Form = ({ onSubmit }: FormProps) => {
                   value={value}
                   onChange={onChange}
                   format="MM/DD/YYYY"
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                      {
+                        borderColor: "secondary.main",
+                      },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                      color: "secondary.main",
+                    },
+                  }}
                   disablePast
                 />
               </LocalizationProvider>
@@ -107,6 +134,15 @@ export const Form = ({ onSubmit }: FormProps) => {
                 onChange={onChange}
                 error={!!error}
                 helperText={error ? error.message : null}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "secondary.main",
+                    },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "secondary.main",
+                  },
+                }}
               />
             )}
             rules={{ required: "Description is required" }}
@@ -126,6 +162,15 @@ export const Form = ({ onSubmit }: FormProps) => {
                 error={!!error}
                 fullWidth
                 helperText={error ? error.message : null}
+                sx={{
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "secondary.main",
+                    },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "secondary.main",
+                  },
+                }}
               />
             )}
           />

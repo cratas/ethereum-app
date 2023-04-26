@@ -7,7 +7,6 @@ import customTheme, { getPalette } from "./theme/theme";
 import { AppWrapper } from "./components/wrappers/AppWrapper";
 import { Menu } from "./components/menu/Menu";
 import { deepmerge } from "@mui/utils";
-import { createContext, useContext } from "react";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { Sections } from "./components/sections/Sections";

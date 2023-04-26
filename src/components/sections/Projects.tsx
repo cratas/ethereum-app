@@ -5,7 +5,6 @@ type Props = {};
 
 export const Projects = (props: Props) => {
   return (
-    // <div>Projects</div>
-    <img src={logo} alt="Logo" width={500} />
+    <div>Projects</div>
   );
 };

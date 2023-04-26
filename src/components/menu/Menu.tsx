@@ -17,7 +17,6 @@ export const Menu = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        bgcolor: "primary.second",
       }}
     >
       <Links />

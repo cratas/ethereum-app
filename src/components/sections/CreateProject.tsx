@@ -32,7 +32,7 @@ export const CreateProject = (props: Props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          mb: 2,
+          mb: 3,
         }}
       >
         <Typography
