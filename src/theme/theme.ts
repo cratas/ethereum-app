@@ -8,7 +8,7 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
       ? {
           primary: {
             main: "#fff",
-            // second: "#DCDCDC",
+            light: "#e0e0e0"
           },
           secondary: {
             main: "#000",
@@ -20,7 +20,7 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
       : {
           primary: {
             main: "#000",
-            // second: "#2F4F4F",
+            light: "#424242",
           },
           secondary: {
             main: "#fff",
@@ -59,6 +59,8 @@ const customTheme = {
         },
       },
     },
+        
+
   },
 };
 

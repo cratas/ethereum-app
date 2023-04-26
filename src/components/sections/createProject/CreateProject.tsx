@@ -1,11 +1,12 @@
 import React from "react";
-import { Form } from "../Form";
-import { Box, Typography } from "@mui/material";
+import { Form } from "../../Form";
+import { Box, Typography, Button } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { useDispatch } from "react-redux";
-import { setCurrentLocation } from "../../redux/currentLocationSlice";
-import { Locations, Severity } from "../../types";
-import { setSnackBar } from "../../redux/notificationsSlice";
+import { setCurrentLocation } from "../../../redux/currentLocationSlice";
+import { Locations, Severity } from "../../../types";
+import { setSnackBar } from "../../../redux/notificationsSlice";
 
 type Props = {};
 
@@ -25,8 +26,21 @@ export const CreateProject = (props: Props) => {
 
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        position: "relative",
+      }}
     >
+      <Button
+        variant="text"
+        sx={{ color: "secondary.main", position: "absolute", left: 0 }}
+        startIcon={<ArrowBackIcon />}
+        onClick={() => dispatch(setCurrentLocation(Locations.PROJECTS))}
+      >
+        Back to projects
+      </Button>
       <Box
         sx={{
           display: "flex",

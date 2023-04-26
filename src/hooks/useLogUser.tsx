@@ -14,6 +14,8 @@ export const useLogUser = () => {
   const login = async () => {
     setIsLoading(true);
     try {
+      (window as any).ethereum.enable();
+
       const provider = new ethers.providers.Web3Provider(
         (window as any).ethereum
       );

@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "@mui/material";
-import { Box } from "@mui/system";
+import { Link, Button, Box } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser } from "../../redux/loggedUserSlice";
 import { Locations } from "../../types";
@@ -10,7 +10,7 @@ import {
 } from "../../redux/currentLocationSlice";
 
 export const Links = () => {
-  const loggedUser  = useSelector(selectLoggedUser);
+  const loggedUser = useSelector(selectLoggedUser);
   const dispatch = useDispatch();
   const currentLocation = useSelector(selectCurrentLocation);
 
@@ -23,18 +23,6 @@ export const Links = () => {
             underline="none"
             sx={{
               color: "secondary.main",
-              fontWeight: currentLocation == Locations.PROJECTS ? "bold" : null,
-              mr: "1.5rem!important",
-            }}
-            onClick={() => dispatch(setCurrentLocation(Locations.PROJECTS))}
-          >
-            Projects
-          </Link>
-          <Link
-            href="#"
-            underline="none"
-            sx={{
-              color: "secondary.main",
               fontWeight:
                 currentLocation == Locations.CREATE_PROJECT ? "bold" : null,
             }}
@@ -42,7 +30,21 @@ export const Links = () => {
               dispatch(setCurrentLocation(Locations.CREATE_PROJECT))
             }
           >
-            Create project
+            <Button
+              startIcon={<AddIcon />}
+              size="medium"
+              variant="contained"
+              sx={{
+                bgcolor: "secondary.main",
+                color: "primary.main",
+                "&:hover": {
+                  bgcolor: "primary.main",
+                  color: "secondary.main",
+                },
+              }}
+            >
+              Create Project
+            </Button>
           </Link>
         </Box>
       )}
