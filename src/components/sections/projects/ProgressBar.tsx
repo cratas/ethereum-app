@@ -24,7 +24,11 @@ interface ProgressBarProps {
 
 export const ProgressBar = ({ value }: ProgressBarProps) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+      }}
+    >
       <BorderLinearProgress variant="determinate" value={value} />
     </Box>
   );

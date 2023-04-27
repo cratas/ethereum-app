@@ -26,7 +26,7 @@ const LevitatingImage = styled.img`
 
 export const Unauthorized = () => {
   return (
-    <Grid container mt={10}>
+    <Grid container mt={13}>
       <Grid item xs={6}>
         <Box
           sx={{

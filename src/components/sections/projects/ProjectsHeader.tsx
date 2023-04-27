@@ -12,7 +12,7 @@ export const ProjectsHeader = ({onSearchChange}: ProjectsHeaderProps) => {
       sx={{
         width: "100%",
         display: "flex",
-        bgcolor: "primary.light",
+        bgcolor: "primary.dark",
         p: 1,
         borderRadius: 2,
         mb: 1,

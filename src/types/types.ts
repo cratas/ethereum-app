@@ -5,3 +5,14 @@ export type User = {
   transactionsCount: number;
   chainId: number;
 };
+
+export type Project = {
+  title: string;
+  description: string;
+  goal: number;
+  date: Date;
+  currentValue: number;
+  imageURL: string;
+  owner: string;
+  donators: { name: string; value: number }[];
+};

@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedUser, setLoggedUser } from "../../redux/loggedUserSlice";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
-import { Button, Tooltip } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { useLogUser } from "../../hooks/useLogUser";
-import { hideModal, showProfileModal } from "../../redux/modalsSlice";
+import { showProfileModal } from "../../redux/modalsSlice";
 import { setSnackBar } from "../../redux/notificationsSlice";
 import { Severity } from "../../types";
+import { UserAddress } from "../UserAddress";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -33,7 +33,12 @@ export const UserMenu = () => {
 
   const handleLogOutClick = () => {
     dispatch(setLoggedUser(null));
-    dispatch(setSnackBar({msg: "Successfully logged out.", severity: Severity.SUCCESS}))
+    dispatch(
+      setSnackBar({
+        msg: "Successfully logged out.",
+        severity: Severity.SUCCESS,
+      })
+    );
     handleClose();
   };
 
@@ -46,7 +51,7 @@ export const UserMenu = () => {
   };
 
   return (
-    <Box sx={{ width: "45%", textAlign: "right"}}>
+    <Box sx={{ width: "45%", textAlign: "right" }}>
       {balance && address ? (
         <div>
           <Box
@@ -66,24 +71,7 @@ export const UserMenu = () => {
               >
                 {balance + " ETH"}
               </Typography>
-              <Tooltip
-                title="Copy to clipboard"
-                arrow
-                placement="top-start"
-                onClick={() => {
-                  navigator.clipboard.writeText(address);
-                }}
-              >
-                <Typography
-                  variant="inherit"
-                  sx={{
-                    color: "secondary.main",
-                    cursor: "pointer",
-                  }}
-                >
-                  {address}
-                </Typography>
-              </Tooltip>
+              <UserAddress address={address} />
             </Box>
 
             <IconButton
@@ -119,9 +107,7 @@ export const UserMenu = () => {
             <MenuItem onClick={handleLogOutClick}>Log out</MenuItem>
           </Menu>
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
     </Box>
   );
 };

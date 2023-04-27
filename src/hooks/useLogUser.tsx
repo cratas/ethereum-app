@@ -39,7 +39,7 @@ export const useLogUser = () => {
           gasPrice,
         })
       );
-      dispatch(setCurrentLocation(Locations.PROJECTS));
+      dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
       dispatch(
         setSnackBar({
           severity: "success",

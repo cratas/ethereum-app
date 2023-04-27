@@ -6,26 +6,35 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { ProgressBar } from "./ProgressBar";
 import { Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setCurrentLocation } from "../../../redux/currentLocationSlice";
+import { Locations, Project } from "../../../types";
 
 interface ProjectCardProps {
-  project: any;
+  project: Project;
 }
 
-export const ProjectCard = ({
-  project: { title, goal, currentValue, description },
-}: ProjectCardProps) => {
+export const ProjectCard = ({ project }: ProjectCardProps) => {
+  const dispatch = useDispatch();
+  const { title, goal, currentValue, description, imageURL } = project;
+
   return (
     <Card
       sx={{ width: 280 }}
-      onClick={() => {
-        console.log("TODO");
-      }}
+      onClick={() =>
+        dispatch(
+          setCurrentLocation({
+            location: Locations.PROJECT_DETAIL,
+            props: project,
+          })
+        )
+      }
     >
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs="
+          image={imageURL}
           alt="green iguana"
           sx={{ borderRadius: 2 }}
         />

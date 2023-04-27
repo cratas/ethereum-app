@@ -7,6 +7,7 @@ export enum ThemeMode {
 export enum Locations {
   PROJECTS = "projects",
   CREATE_PROJECT = "createProject",
+  PROJECT_DETAIL = "projectDetail"
 }
 
 export enum ModalTypes {

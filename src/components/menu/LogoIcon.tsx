@@ -8,10 +8,11 @@ import { selectLoggedUser } from "../../redux/loggedUserSlice";
 
 export const LogoIcon = () => {
   const dispatch = useDispatch();
-  const loggedUser = useSelector(selectLoggedUser)
+  const loggedUser = useSelector(selectLoggedUser);
 
   const handleIconClick = () => {
-    !!loggedUser && dispatch(setCurrentLocation(Locations.PROJECTS));
+    !!loggedUser &&
+      dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
   };
 
   return (

@@ -8,14 +8,12 @@ import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import { Locations, Severity } from "../../../types";
 import { setSnackBar } from "../../../redux/notificationsSlice";
 
-type Props = {};
-
-export const CreateProject = (props: Props) => {
+export const CreateProject = () => {
   const dispatch = useDispatch();
 
   const handleFormSubmit = (data: any) => {
     console.log(data);
-    dispatch(setCurrentLocation(Locations.PROJECTS));
+    dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
     dispatch(
       setSnackBar({
         msg: "Project successfully created.",
@@ -37,7 +35,9 @@ export const CreateProject = (props: Props) => {
         variant="text"
         sx={{ color: "secondary.main", position: "absolute", left: 0 }}
         startIcon={<ArrowBackIcon />}
-        onClick={() => dispatch(setCurrentLocation(Locations.PROJECTS))}
+        onClick={() =>
+          dispatch(setCurrentLocation({ location: Locations.PROJECTS }))
+        }
       >
         Back to projects
       </Button>

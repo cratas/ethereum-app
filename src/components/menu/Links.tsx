@@ -12,7 +12,7 @@ import {
 export const Links = () => {
   const loggedUser = useSelector(selectLoggedUser);
   const dispatch = useDispatch();
-  const currentLocation = useSelector(selectCurrentLocation);
+  const { location } = useSelector(selectCurrentLocation);
 
   return (
     <Box sx={{ width: "45%" }}>
@@ -24,10 +24,12 @@ export const Links = () => {
             sx={{
               color: "secondary.main",
               fontWeight:
-                currentLocation == Locations.CREATE_PROJECT ? "bold" : null,
+                location == Locations.CREATE_PROJECT ? "bold" : null,
             }}
             onClick={() =>
-              dispatch(setCurrentLocation(Locations.CREATE_PROJECT))
+              dispatch(
+                setCurrentLocation({ location: Locations.CREATE_PROJECT })
+              )
             }
           >
             <Button
