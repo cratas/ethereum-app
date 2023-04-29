@@ -9,10 +9,13 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
           primary: {
             main: "#fff",
             light: "#eeeeee",
-            dark: "#e0e0e0"
+            dark: "#e0e0e0",
+            ultralight: "#bdbdbd",
           },
           secondary: {
             main: "#000",
+            light: "#424242",
+            dark: "#212121",
           },
           background: {
             default: "#fff",
@@ -22,11 +25,13 @@ const getPalette = (mode: PaletteMode = ThemeMode.LIGHT as PaletteMode) => ({
           primary: {
             main: "#000",
             light: "#424242",
-            dark: "#212121"
-
+            dark: "#212121",
+            ultralight: "#757575",
           },
           secondary: {
             main: "#fff",
+            light: "#eeeeee",
+            dark: "#e0e0e0",
           },
           background: {
             default: "#000",
@@ -62,8 +67,6 @@ const customTheme = {
         },
       },
     },
-        
-
   },
 };
 

@@ -37,7 +37,7 @@ export const SearchBox = ({
         display: "flex",
         alignItems: "center",
         width,
-        maxHeight: "30px",
+        maxHeight: "34px",
         boxShadow: "none",
         borderWidth: "1px",
         bgcolor: "primary.second",

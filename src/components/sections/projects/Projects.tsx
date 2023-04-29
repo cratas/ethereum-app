@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Grid, Typography, Box } from "@mui/material";
-import { ProjectsHeader } from "./ProjectsHeader";
+import { ProjectsHeader } from "./projectsHeaders/ProjectsHeader";
 import { ProjectCard } from "./ProjectCard";
+import { Sort } from "./projectsHeaders/Sort";
 
 export const Projects = () => {
   const [currentSearch, setCurrentSearch] = useState<string>("");
@@ -27,11 +28,12 @@ export const Projects = () => {
   return (
     <Grid container>
       <ProjectsHeader onSearchChange={onSearchChange} />
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
         <Typography sx={{ color: "secondary.main", fontWeight: "bold", my: 1 }}>
           All projects ({projects.length})
         </Typography>
       </Grid>
+
       <Box
         sx={{
           display: "flex",
