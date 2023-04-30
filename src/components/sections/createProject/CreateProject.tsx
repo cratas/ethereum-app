@@ -7,12 +7,16 @@ import { useDispatch } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import { Locations, Severity } from "../../../types";
 import { setSnackBar } from "../../../redux/notificationsSlice";
+import { useContractContext } from "../../context/ContractContext";
 
 export const CreateProject = () => {
   const dispatch = useDispatch();
+  const { createProject } = useContractContext();
 
-  const handleFormSubmit = (data: any) => {
-    console.log(data);
+  const handleFormSubmit = async (data: any) => {
+    const result = await createProject(data);
+    console.log(result);
+
     dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
     dispatch(
       setSnackBar({
@@ -47,6 +51,7 @@ export const CreateProject = () => {
           justifyContent: "center",
           alignItems: "center",
           mb: 3,
+          mt: -1,
         }}
       >
         <Typography

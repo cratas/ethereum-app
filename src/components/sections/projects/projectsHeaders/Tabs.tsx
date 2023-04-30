@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs as TabsMUI, Box, Tab, Divider } from "@mui/material";
 import { Sort } from "./Sort";
+import { CustomTab } from "./CustomTab";
+import { CustomDivider } from "./CustomDivider";
 
 const a11yProps = (index: number) => {
   return {
@@ -12,7 +14,7 @@ const a11yProps = (index: number) => {
 interface TabProps {}
 
 export const Tabs = ({}: TabProps) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number>(0);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -41,42 +43,4 @@ export const Tabs = ({}: TabProps) => {
   );
 };
 
-const CustomTab = ({ ...props }) => {
-  return (
-    <Tab
-      disableRipple
-      {...props}
-      sx={{
-        color: "primary.ultralight",
-        textDecoration: "none",
-        textTransform: "none",
-        "&.Mui-selected": {
-          color: "secondary.main",
-        },
-        "&:hover": {
-          color: "text.secondary",
-        },
-        "&:focus": {
-          color: "secondary.main",
-        },
-      }}
-    />
-  );
-};
 
-const CustomDivider = ({ bgcolor = "primary.dark" }) => {
-  return (
-    <Divider
-      orientation="vertical"
-      sx={{
-        height: 30,
-        alignSelf: "center",
-        width: "3px",
-        bgcolor,
-        boxShadow: "none",
-        border: "none",
-        borderRadius: 2,
-      }}
-    />
-  );
-};

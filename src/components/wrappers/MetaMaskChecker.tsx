@@ -8,7 +8,8 @@ interface MetaMaskCheckerProps {
 }
 
 export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
-  const isInstalled = (window as any).ethereum && (window as any).ethereum.isMetaMask
+  const isInstalled =
+    (window as any).ethereum && (window as any).ethereum.isMetaMask;
 
   return isInstalled ? (
     (children as JSX.Element)
@@ -51,14 +52,13 @@ export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
           browser. please install metamask extension using the button below.
         </Typography>
         <Button
-        
           variant="contained"
           sx={{
             bgcolor: "secondary.main",
             color: "primary.main",
             mt: 3,
           }}
-          onClick={() => location.href = "https://metamask.io/"}
+          onClick={() => (location.href = "https://metamask.io/")}
         >
           Install
         </Button>

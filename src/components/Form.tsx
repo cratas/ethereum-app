@@ -91,13 +91,13 @@ export const Form = ({ onSubmit }: FormProps) => {
         </Grid>
         <Grid item xs={3} sx={{ my: 1, pl: 1 }}>
           <Controller
-            name="date"
+            name="deadline"
             control={control}
             defaultValue={tomorrow}
             render={({ field: { onChange, value } }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
-                  label="End date"
+                  label="Deadline"
                   minDate={tomorrow}
                   value={value}
                   onChange={onChange}
@@ -150,7 +150,7 @@ export const Form = ({ onSubmit }: FormProps) => {
         </Grid>
         <Grid item xs={12} sx={{ my: 1 }}>
           <Controller
-            name="image"
+            name="imageURL"
             control={control}
             defaultValue=""
             render={({ field: { onChange, value }, fieldState: { error } }) => (

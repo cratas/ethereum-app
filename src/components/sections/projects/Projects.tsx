@@ -2,11 +2,14 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Grid, Typography, Box } from "@mui/material";
 import { ProjectsHeader } from "./projectsHeaders/ProjectsHeader";
 import { ProjectCard } from "./ProjectCard";
-import { Sort } from "./projectsHeaders/Sort";
+import { useContractContext } from "../../context/ContractContext";
 
 export const Projects = () => {
   const [currentSearch, setCurrentSearch] = useState<string>("");
   const [projects, setProjects] = useState<any>(projectsMock);
+
+  const { contract } = useContractContext();
+  console.log(contract);
 
   const onSearchChange = (data: string) => {
     setCurrentSearch(data);
@@ -28,7 +31,15 @@ export const Projects = () => {
   return (
     <Grid container>
       <ProjectsHeader onSearchChange={onSearchChange} />
-      <Grid item xs={12} sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
         <Typography sx={{ color: "secondary.main", fontWeight: "bold", my: 1 }}>
           All projects ({projects.length})
         </Typography>

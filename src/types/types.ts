@@ -10,7 +10,7 @@ export type Project = {
   title: string;
   description: string;
   goal: number;
-  date: Date;
+  deadline: Date;
   currentValue: number;
   imageURL: string;
   owner: string;

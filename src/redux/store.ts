@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import currentThemeSlice, { name as currentThemeName } from "./loggedUserSlice";
 import modalsSlice, { name as modalSliceName } from "./modalsSlice";
-import notificationsSlice, { name as notificationsSliceName } from "./notificationsSlice";
+import notificationsSlice, {
+  name as notificationsSliceName,
+} from "./notificationsSlice";
 
 import currentLocationSlice, {
   name as currentLocationName,
@@ -12,7 +14,7 @@ export const store = configureStore({
     [currentThemeName]: currentThemeSlice,
     [currentLocationName]: currentLocationSlice,
     [modalSliceName]: modalsSlice,
-    [notificationsSliceName]: notificationsSlice
+    [notificationsSliceName]: notificationsSlice,
   },
 });
 
