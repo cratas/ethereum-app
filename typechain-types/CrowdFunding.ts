@@ -63,6 +63,7 @@ export declare namespace CrowdFunding {
 export interface CrowdFundingInterface extends utils.Interface {
   functions: {
     "createProject(address,string,string,uint256,uint256,string)": FunctionFragment;
+    "getBalance()": FunctionFragment;
     "getInvestors(uint256)": FunctionFragment;
     "getProjects()": FunctionFragment;
     "investToProject(uint256)": FunctionFragment;
@@ -73,6 +74,7 @@ export interface CrowdFundingInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "createProject"
+      | "getBalance"
       | "getInvestors"
       | "getProjects"
       | "investToProject"
@@ -90,6 +92,10 @@ export interface CrowdFundingInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBalance",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getInvestors",
@@ -116,6 +122,7 @@ export interface CrowdFundingInterface extends utils.Interface {
     functionFragment: "createProject",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getBalance", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getInvestors",
     data: BytesLike
@@ -174,6 +181,8 @@ export interface CrowdFunding extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getBalance(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     getInvestors(
       _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -216,6 +225,8 @@ export interface CrowdFunding extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getBalance(overrides?: CallOverrides): Promise<BigNumber>;
+
   getInvestors(
     _id: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -257,6 +268,8 @@ export interface CrowdFunding extends BaseContract {
       _image: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getBalance(overrides?: CallOverrides): Promise<BigNumber>;
 
     getInvestors(
       _id: PromiseOrValue<BigNumberish>,
@@ -303,6 +316,8 @@ export interface CrowdFunding extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getBalance(overrides?: CallOverrides): Promise<BigNumber>;
+
     getInvestors(
       _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -333,6 +348,8 @@ export interface CrowdFunding extends BaseContract {
       _image: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    getBalance(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getInvestors(
       _id: PromiseOrValue<BigNumberish>,

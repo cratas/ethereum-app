@@ -1,8 +1,7 @@
-export const getDaysTo = (deadline: Date) => {
-  const today = new Date();
-  const deadlineDate = new Date(deadline);
-  const timeDiff = deadlineDate.getTime() - today.getTime();
-  const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
+import dayjs from "dayjs";
 
-  return daysRemaining;
+export const getDaysTo = (deadline: Date) => {
+
+  const date = dayjs(deadline)
+  return date.diff(new Date(), 'day')
 };

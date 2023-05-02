@@ -3,7 +3,7 @@ import { InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller } from "react-hook-form";
 import { Button, FormControl, Grid } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { MobileDateTimePicker  } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
@@ -12,7 +12,7 @@ interface FormProps {
   onSubmit: (...args: unknown[]) => void;
 }
 
-const tomorrow = dayjs().add(1, "day");
+const tomorrow = dayjs().add(1, "hour");
 
 export const Form = ({ onSubmit }: FormProps) => {
   const { handleSubmit, control } = useForm();
@@ -96,12 +96,12 @@ export const Form = ({ onSubmit }: FormProps) => {
             defaultValue={tomorrow}
             render={({ field: { onChange, value } }) => (
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
+                <MobileDateTimePicker 
                   label="Deadline"
                   minDate={tomorrow}
                   value={value}
                   onChange={onChange}
-                  format="MM/DD/YYYY"
+                  format="MM/DD/YYYY hh:mm"
                   sx={{
                     width: "100%",
                     "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":

@@ -2,4 +2,3 @@
 /* tslint:disable */
 /* eslint-disable */
 export { CrowdFunding__factory } from "./CrowdFunding__factory";
-export { Lock__factory } from "./Lock__factory";

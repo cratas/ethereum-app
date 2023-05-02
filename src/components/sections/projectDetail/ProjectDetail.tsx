@@ -13,6 +13,7 @@ import { ListItem } from "../../ListItem";
 import { UserAddress } from "../../UserAddress";
 import { useDispatch } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
+import dayjs from "dayjs";
 
 interface ProjectDetailProps {
   project: Project;
@@ -68,7 +69,11 @@ export const ProjectDetail = ({
         <ProgressBar value={(currentValue / goal) * 100} />
       </Grid>
       <Grid container item xs={2} pl={2} gap={2}>
-        <NumberCard title="Days left" value={getDaysLeft(new Date(deadline))} />
+        <NumberCard
+          title="Deadline"
+          value={dayjs(new Date(deadline)).format("DD.MM.YYYY HH:mm")}
+          valueFontsize={17}
+        />
         <NumberCard title="Goal" value={goal} />
         <NumberCard title="Collected" value={currentValue} />
       </Grid>

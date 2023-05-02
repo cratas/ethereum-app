@@ -4,9 +4,11 @@ import React from "react";
 export const NumberCard = ({
   title,
   value,
+  valueFontsize,
 }: {
   title: string;
   value: number | string;
+  valueFontsize?: number;
 }) => (
   <Grid
     container
@@ -20,7 +22,7 @@ export const NumberCard = ({
       item
       xs={12}
       p={1}
-      fontSize={30}
+      fontSize={valueFontsize ?? 30}
       fontWeight="bold"
       color="secondary.main"
     >

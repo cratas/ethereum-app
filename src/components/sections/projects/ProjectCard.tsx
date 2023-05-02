@@ -87,7 +87,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 color="secondary.main"
                 fontWeight="bold"
               >
-                {getDaysTo(deadline)}
+                {getDaysTo(new Date(deadline))}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Days remain

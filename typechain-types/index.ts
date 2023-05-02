@@ -2,7 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { CrowdFunding } from "./CrowdFunding";
-export type { Lock } from "./Lock";
 export * as factories from "./factories";
 export { CrowdFunding__factory } from "./factories/CrowdFunding__factory";
-export { Lock__factory } from "./factories/Lock__factory";

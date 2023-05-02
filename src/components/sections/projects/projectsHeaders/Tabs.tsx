@@ -17,7 +17,7 @@ interface TabProps {
 }
 
 export const Tabs = ({ onSortItems, onFilterModeChange }: TabProps) => {
-  const [value, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(1);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

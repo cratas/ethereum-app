@@ -19,7 +19,6 @@ export const Links = () => {
       {loggedUser && (
         <Box>
           <Link
-            href="#"
             underline="none"
             sx={{
               color: "secondary.main",
