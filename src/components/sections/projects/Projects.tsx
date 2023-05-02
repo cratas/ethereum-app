@@ -3,13 +3,35 @@ import { Grid, Typography, Box } from "@mui/material";
 import { ProjectsHeader } from "./projectsHeaders/ProjectsHeader";
 import { ProjectCard } from "./ProjectCard";
 import { useContractContext } from "../../context/ContractContext";
+import { CrowdFunding } from "../../../../typechain-types";
+import { Project } from "../../../types";
+import { convertProjectData } from "../../../utils/convertProjectData";
+import { useSelector } from "react-redux";
+import { selectLoggedUser } from "../../../redux/loggedUserSlice";
+import { filterByTabs } from "../../../utils/filterByTabs";
 
 export const Projects = () => {
   const [currentSearch, setCurrentSearch] = useState<string>("");
-  const [projects, setProjects] = useState<any>(projectsMock);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [originalProjects, setOriginalProjects] = useState<Project[]>([]);
+  const [sortDirection, setSortDirection] = useState<string>("desc");
+  const [filterMode, setFilterMode] = useState(0);
+  const { address } = useSelector(selectLoggedUser) ?? {};
 
   const { contract } = useContractContext();
-  console.log(contract);
+
+  useEffect(() => {
+    let fetchedProjects: CrowdFunding.ProjectStructOutput[] = [];
+
+    const fetchData = async () => {
+      fetchedProjects = await (contract as CrowdFunding).getProjects();
+      const originalFetchedProjects = convertProjectData(fetchedProjects);
+      setProjects(originalFetchedProjects);
+      setOriginalProjects(originalFetchedProjects);
+    };
+
+    fetchData();
+  }, []);
 
   const onSearchChange = (data: string) => {
     setCurrentSearch(data);
@@ -17,20 +39,28 @@ export const Projects = () => {
 
   const calculateData = useMemo(
     () =>
-      projectsMock?.filter(
-        (item: any) =>
-          !currentSearch || item.title.toLowerCase().includes(currentSearch)
-      ),
-    [currentSearch]
+      originalProjects
+        .filter((item: Project) => filterByTabs(item, filterMode, address))
+        .filter(
+          (item: Project) =>
+            !currentSearch ||
+            item.title.toLowerCase().includes(currentSearch) ||
+            item.owner === currentSearch
+        ),
+    [currentSearch, filterMode]
   );
 
   useEffect(() => {
     setProjects(calculateData);
-  }, [currentSearch, calculateData]);
+  }, [currentSearch, calculateData, filterMode]);
 
   return (
     <Grid container>
-      <ProjectsHeader onSearchChange={onSearchChange} />
+      <ProjectsHeader
+        onSearchChange={onSearchChange}
+        onSortItems={setSortDirection}
+        onFilterModeChange={setFilterMode}
+      />
       <Grid
         item
         xs={12}
@@ -53,72 +83,20 @@ export const Projects = () => {
           gap: 2.5,
         }}
       >
-        {calculateData?.map((p: any, idx) => (
-          <ProjectCard key={idx} project={p} />
-        ))}
+        {projects
+          .sort(
+            (a: Project, b: Project) =>
+              new Date(
+                sortDirection === "desc" ? b.deadline : a.deadline
+              ).getTime() -
+              new Date(
+                sortDirection === "desc" ? a.deadline : b.deadline
+              ).getTime()
+          )
+          .map((p: Project, idx) => (
+            <ProjectCard key={idx} project={p} />
+          ))}
       </Box>
     </Grid>
   );
 };
-
-const projectsMock = [
-  {
-    title: "kamil",
-    description: "hello this is some desc blgba bla",
-    goal: 100,
-    date: new Date().toString(),
-    currentValue: 20,
-    owner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-    imageURL:
-      "https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs=",
-  },
-  {
-    title: "pavel",
-    description: "hello this is some desc blgba bla",
-    goal: 100,
-    date: new Date().toString(),
-    currentValue: 20,
-    owner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-
-    imageURL:
-      "https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs=",
-  },
-  {
-    title: "jarda",
-    description: "hello this is some desc blgba bla",
-    goal: 100,
-    date: new Date().toString(),
-    currentValue: 20,
-    owner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-
-    imageURL:
-      "https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs=",
-  },
-  {
-    title: "vlastik",
-    description:
-      "hello this is some desc blgba bla hello this is some desc blgba bla",
-    goal: 100,
-    date: new Date().toString(),
-    owner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-    currentValue: 50,
-    imageURL:
-      "https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs=",
-  },
-  {
-    title: "vlastik",
-    description:
-      "hello this is some desc blgba bla hello this is some desc blgba bla",
-    goal: 100,
-    date: new Date(new Date().getTime() + 20 * 24 * 60 * 60 * 1000).toString(),
-    currentValue: 80,
-    owner: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-    donators: [
-      { name: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", value: 0.2 },
-      { name: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", value: 0.45 },
-      { name: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC", value: 2.3 },
-    ],
-    imageURL:
-      "https://media.istockphoto.com/id/901948904/cs/fotografie/hrom%C3%A1dka-%C3%A9terov%C3%BDch-minc%C3%AD-se-zlat%C3%BDm-pozad%C3%ADm.jpg?s=2048x2048&w=is&k=20&c=BvSR70Np7bnfRJFFvPDCu7cUbJBT-bJsTR3COoN3JHs=",
-  },
-];

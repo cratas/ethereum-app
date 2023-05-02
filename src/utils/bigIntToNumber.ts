@@ -1,4 +1,4 @@
 import { ethers, BigNumberish } from "ethers";
 
-export const bigNumberishToNumber = (balance: BigNumberish) =>
-  ethers.utils.formatEther(balance);
+export const bigNumberishToNumber = (balance: BigNumberish): number =>
+  Number(ethers.utils.formatEther(balance));

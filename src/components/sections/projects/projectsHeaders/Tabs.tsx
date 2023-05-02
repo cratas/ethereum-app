@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Tabs as TabsMUI, Box, Tab, Divider } from "@mui/material";
+import React, { useState } from "react";
+import { Tabs as TabsMUI, Box } from "@mui/material";
 import { Sort } from "./Sort";
 import { CustomTab } from "./CustomTab";
 import { CustomDivider } from "./CustomDivider";
@@ -11,18 +11,22 @@ const a11yProps = (index: number) => {
   };
 };
 
-interface TabProps {}
+interface TabProps {
+  onSortItems: (direction: string) => void;
+  onFilterModeChange: (mode: number) => void;
+}
 
-export const Tabs = ({}: TabProps) => {
+export const Tabs = ({ onSortItems, onFilterModeChange }: TabProps) => {
   const [value, setValue] = useState<number>(0);
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    onFilterModeChange(newValue);
   };
 
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Sort />
+      <Sort onSortItems={onSortItems} />
 
       <TabsMUI
         value={value}
@@ -42,5 +46,3 @@ export const Tabs = ({}: TabProps) => {
     </Box>
   );
 };
-
-

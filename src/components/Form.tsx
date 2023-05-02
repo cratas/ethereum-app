@@ -150,7 +150,7 @@ export const Form = ({ onSubmit }: FormProps) => {
         </Grid>
         <Grid item xs={12} sx={{ my: 1 }}>
           <Controller
-            name="imageURL"
+            name="image"
             control={control}
             defaultValue=""
             render={({ field: { onChange, value }, fieldState: { error } }) => (

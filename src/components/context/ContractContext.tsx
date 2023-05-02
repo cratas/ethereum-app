@@ -5,6 +5,7 @@ import { abi } from "../../../artifacts/contracts/CrowdFunding.sol/CrowdFunding.
 
 import { address } from "../../../contract.json";
 import { Project } from "../../types";
+import { numberToBigInt } from "../../utils/numberToBigInt";
 
 interface ContractState {
   contract: null | CrowdFunding;
@@ -27,21 +28,18 @@ export const ContractContextProvider = ({
   const contract = new Contract(address, abi, user) as CrowdFunding;
 
   const createProject = async (data: Project) => {
-    try {
-      const { title, description, goal, deadline, imageURL } = data;
+    const { title, description, goal, deadline, image } = data;
 
-      await contract.createProject(
-        user.getAddress(),
-        title,
-        description,
-        ethers.utils.parseEther(goal.toString()),
-        new Date(deadline).getTime(),
-        imageURL
-      );
-      console.log("success");
-    } catch (error) {
-      console.log("failed");
-    }
+    const convertedDate = String(new Date(deadline).getTime());
+
+    await contract.createProject(
+      user.getAddress(),
+      title,
+      description,
+      numberToBigInt(convertedDate),
+      numberToBigInt(goal.toString()),
+      image
+    );
   };
 
   return (

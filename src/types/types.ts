@@ -7,12 +7,14 @@ export type User = {
 };
 
 export type Project = {
+  id: number;
+  owner: string;
   title: string;
   description: string;
-  goal: number;
   deadline: Date;
+  goal: number;
   currentValue: number;
-  imageURL: string;
-  owner: string;
-  donators: { name: string; value: number }[];
+  image: string;
+  investors: string[],
+  investments: number[]
 };

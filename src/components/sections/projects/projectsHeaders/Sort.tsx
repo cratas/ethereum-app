@@ -3,13 +3,16 @@ import React, { useState } from "react";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-interface SortProps {}
+interface SortProps {
+  onSortItems: (direction: string) => void;
+}
 
-export const Sort = ({}: SortProps) => {
+export const Sort = ({onSortItems}: SortProps) => {
   const [direction, setDirection] = useState<"asc" | "desc">("desc");
 
   const handleClick = () => {
     setDirection(direction === "asc" ? "desc" : "asc");
+    onSortItems(direction === "asc" ? "desc" : "asc")
   };
 
   return (

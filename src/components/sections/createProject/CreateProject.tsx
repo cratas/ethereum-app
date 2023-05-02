@@ -14,16 +14,24 @@ export const CreateProject = () => {
   const { createProject } = useContractContext();
 
   const handleFormSubmit = async (data: any) => {
-    const result = await createProject(data);
-    console.log(result);
+    try {
+      await createProject(data);
 
-    dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
-    dispatch(
-      setSnackBar({
-        msg: "Project successfully created.",
-        severity: Severity.SUCCESS,
-      })
-    );
+      dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
+      dispatch(
+        setSnackBar({
+          msg: "Project successfully created.",
+          severity: Severity.SUCCESS,
+        })
+      );
+    } catch (error) {
+      dispatch(
+        setSnackBar({
+          msg: "Project wasn't created, something went wrong.",
+          severity: Severity.ERROR,
+        })
+      );
+    }
   };
 
   return (

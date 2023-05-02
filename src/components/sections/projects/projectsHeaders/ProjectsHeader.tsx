@@ -2,13 +2,18 @@ import React from "react";
 import { Box } from "@mui/material";
 import { SearchBox } from "../SearchBox";
 import { Tabs } from "./Tabs";
-import { Sort } from "./Sort";
 
 interface ProjectsHeaderProps {
-  onSearchChange?: (value: string) => void;
+  onSearchChange: (value: string) => void;
+  onSortItems: (direction: string) => void;
+  onFilterModeChange: (value: number) => void;
 }
 
-export const ProjectsHeader = ({ onSearchChange }: ProjectsHeaderProps) => {
+export const ProjectsHeader = ({
+  onSearchChange,
+  onSortItems,
+  onFilterModeChange,
+}: ProjectsHeaderProps) => {
   return (
     <Box
       sx={{
@@ -28,7 +33,7 @@ export const ProjectsHeader = ({ onSearchChange }: ProjectsHeaderProps) => {
         width={410}
         onSearchChange={onSearchChange}
       />
-      <Tabs />
+      <Tabs onSortItems={onSortItems} onFilterModeChange={onFilterModeChange} />
     </Box>
   );
 };

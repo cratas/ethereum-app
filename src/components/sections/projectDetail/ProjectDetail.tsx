@@ -20,14 +20,16 @@ interface ProjectDetailProps {
 
 export const ProjectDetail = ({
   project: {
+    id,
     title,
     currentValue,
     goal,
-    imageURL,
-    date,
-    owner,
     description,
-    donators,
+    image,
+    deadline,
+    owner,
+    investors,
+    investments,
   },
 }: ProjectDetailProps) => {
   const dispatch = useDispatch();
@@ -56,7 +58,7 @@ export const ProjectDetail = ({
       <Grid item xs={10}>
         <Paper sx={{ height: "20rem", overflow: "hidden", mb: 1 }}>
           <img
-            src={imageURL}
+            src={image}
             style={{
               width: "100%",
               height: "auto",
@@ -66,7 +68,7 @@ export const ProjectDetail = ({
         <ProgressBar value={(currentValue / goal) * 100} />
       </Grid>
       <Grid container item xs={2} pl={2} gap={2}>
-        <NumberCard title="Days left" value={getDaysLeft(date)} />
+        <NumberCard title="Days left" value={getDaysLeft(new Date(deadline))} />
         <NumberCard title="Goal" value={goal} />
         <NumberCard title="Collected" value={currentValue} />
       </Grid>
@@ -107,9 +109,10 @@ export const ProjectDetail = ({
           </Typography>
         </ListItem>
         <ListItem title="Donators">
-          {donators ? (
-            donators.map(({ name, value }, idx) => (
+          {investors ? (
+            investors.map((name, idx) => (
               <Box
+                key={idx}
                 sx={{
                   display: "flex",
                   width: "100%",
@@ -126,7 +129,7 @@ export const ProjectDetail = ({
                   <UserAddress address={name} />
                 </Box>
                 <Box mr={2} fontWeight="bold">
-                  {value}
+                  {investments[idx]}
                 </Box>
               </Box>
             ))
@@ -136,7 +139,7 @@ export const ProjectDetail = ({
         </ListItem>
       </Grid>
       <Grid item xs={5} mt={4}>
-        <FundBox />
+        <FundBox projectId={id} />
       </Grid>
     </Grid>
   );

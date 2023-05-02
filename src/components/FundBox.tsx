@@ -1,14 +1,50 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { InputAdornment } from "@mui/material";
+import { useContractContext } from "./context/ContractContext";
+import { useDispatch } from "react-redux";
+import { setSnackBar } from "../redux/notificationsSlice";
+import { Locations, Severity } from "../types";
+import { numberToBigInt } from "../utils/numberToBigInt";
+import { setCurrentLocation } from "../redux/currentLocationSlice";
 
-export const FundBox = () => {
-  const [fundValue, setFundValue] = useState<number>();
+export const FundBox = ({ projectId }: { projectId: number }) => {
+  const [fundValue, setFundValue] = useState<string>();
+  const { contract } = useContractContext();
+  const dispatch = useDispatch();
 
   const onFundValueChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFundValue(Number(e.target.value));
+    setFundValue(e.target.value);
+  };
+
+  const handleButtonClick = async () => {
+    if (fundValue) {
+      try {
+        const tx = await contract?.investToProject(projectId, {
+          value: numberToBigInt(fundValue),
+        });
+
+        await tx?.wait();
+
+        dispatch(
+          setSnackBar({
+            severity: Severity.SUCCESS,
+            msg: "Successfully invested into project.",
+          })
+        );
+        dispatch(setCurrentLocation({location: Locations.PROJECTS}));
+      } catch (error) {
+        console.log(error);
+        dispatch(
+          setSnackBar({
+            severity: Severity.ERROR,
+            msg: "Something went wrong, transaction was not completed.",
+          })
+        );
+      }
+    }
   };
 
   return (
@@ -22,7 +58,7 @@ export const FundBox = () => {
         textAlign: "center",
         borderRadius: 2,
         p: 2,
-        gap: 3
+        gap: 3,
       }}
     >
       <Typography
@@ -39,7 +75,7 @@ export const FundBox = () => {
         variant="outlined"
         fullWidth
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*", min: 0 }}
-        value={fundValue}
+        value={fundValue || ""}
         onChange={onFundValueChange}
         type="number"
         sx={{
@@ -69,6 +105,7 @@ export const FundBox = () => {
       <Button
         size="large"
         variant="contained"
+        onClick={handleButtonClick}
         sx={{
           bgcolor: "secondary.main",
           color: "primary.main",

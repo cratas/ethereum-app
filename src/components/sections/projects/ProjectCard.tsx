@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import { Locations, Project } from "../../../types";
+import { getDaysTo } from "../../../utils/getDaysTo";
 
 interface ProjectCardProps {
   project: Project;
@@ -16,7 +17,7 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const dispatch = useDispatch();
-  const { title, goal, currentValue, description, imageURL } = project;
+  const { title, goal, currentValue, description, image, deadline } = project;
 
   return (
     <Card
@@ -25,7 +26,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         dispatch(
           setCurrentLocation({
             location: Locations.PROJECT_DETAIL,
-            props: project,
+            props: {...project, deadline: project.deadline.toISOString() },
           })
         )
       }
@@ -34,8 +35,8 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         <CardMedia
           component="img"
           height="140"
-          image={imageURL}
-          alt="green iguana"
+          image={image}
+          alt="Project image"
           sx={{ borderRadius: 2 }}
         />
         <CardContent>
@@ -48,7 +49,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             {title}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            {description.slice(0, 39) + " ..."}
+            {description.slice(0, 30) + " ..."}
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
             <Box
@@ -65,7 +66,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 color="secondary.main"
                 fontWeight="bold"
               >
-                {currentValue} %
+                {currentValue} ETH
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Collected
@@ -86,7 +87,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
                 color="secondary.main"
                 fontWeight="bold"
               >
-                {goal}
+                {getDaysTo(deadline)}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Days remain
