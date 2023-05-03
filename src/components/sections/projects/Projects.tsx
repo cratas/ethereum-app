@@ -45,7 +45,7 @@ export const Projects = () => {
           (item: Project) =>
             !currentSearch ||
             item.title.toLowerCase().includes(currentSearch) ||
-            item.owner === currentSearch
+            item.owner.toLowerCase() === currentSearch.toLowerCase()
         ),
     [currentSearch, filterMode]
   );

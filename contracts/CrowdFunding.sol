@@ -15,6 +15,7 @@ contract CrowdFunding {
         string image;
         address[] investors;
         uint256[] investments;
+        bool isClosed;
     }
 
     mapping(uint256 => Project) public projects; // using that we can get projects by projects[0]
@@ -43,16 +44,36 @@ contract CrowdFunding {
         project.deadline = _deadline;
         project.currentValue = 0;
         project.image = _image;
-
+        project.isClosed = false;
+        
         numberOfProjects++;
 
         return numberOfProjects - 1;
     }
 
+function closeProject(uint256 projectId) public {
+    Project storage project = projects[projectId];
+    require(project.owner == msg.sender, "Only project owner can close the project");
+    require(!project.isClosed, "Project is already closed");
+
+    if (project.deadline <= block.timestamp) {
+        if (project.currentValue >= project.goal) {
+            payable(project.owner).transfer(project.currentValue);
+        } else {
+            for (uint256 j = 0; j < project.investors.length; j++) {
+                payable(project.investors[j]).transfer(project.investments[j]);
+            }
+        }
+    }
+    
+    project.isClosed = true;
+}
+
     function investToProject(uint256 _id) public payable {
         uint256 amount = msg.value;
 
         Project storage project = projects[_id];
+
         project.investors.push(msg.sender);
         project.investments.push(amount);
         project.currentValue = project.currentValue + amount;

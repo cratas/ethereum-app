@@ -17,20 +17,39 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const dispatch = useDispatch();
-  const { title, goal, currentValue, description, image, deadline } = project;
+  const { title, goal, currentValue, description, image, deadline, isClosed } =
+    project;
 
   return (
     <Card
-      sx={{ width: 280 }}
+      sx={{ width: 280, position: "relative" }}
       onClick={() =>
         dispatch(
           setCurrentLocation({
             location: Locations.PROJECT_DETAIL,
-            props: {...project, deadline: project.deadline.toISOString() },
+            props: { ...project, deadline: project.deadline.toISOString() },
           })
         )
       }
     >
+      {isClosed && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            zIndex: 100,
+            bgcolor: "red",
+            px: 2,
+            py: 1,
+            borderRadius: 1,
+            fontWeight: "bold",
+            color: "primary.main",
+          }}
+        >
+          Closed
+        </Box>
+      )}
       <CardActionArea>
         <CardMedia
           component="img"

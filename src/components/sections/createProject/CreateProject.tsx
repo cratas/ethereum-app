@@ -5,7 +5,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { useDispatch } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
-import { Locations, Severity } from "../../../types";
+import { Locations, Project, Severity } from "../../../types";
 import { setSnackBar } from "../../../redux/notificationsSlice";
 import { useContractContext } from "../../context/ContractContext";
 
@@ -13,9 +13,15 @@ export const CreateProject = () => {
   const dispatch = useDispatch();
   const { createProject } = useContractContext();
 
-  const handleFormSubmit = async (data: any) => {
+  const handleFormSubmit = async (data: Project) => {
+    const newProject = {
+      ...data,
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
+    };
+
     try {
-      await createProject(data);
+      await createProject(newProject);
 
       dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
       dispatch(

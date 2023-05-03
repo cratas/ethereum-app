@@ -15,12 +15,11 @@ export const convertProjectData = (data: CrowdFunding.ProjectStructOutput[]) =>
       deadline,
       goal,
       currentValue,
-      image: project.image
-        ? project.image
-        : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
+      image: project.image,
       investors: project.investors,
       investments: project.investments.map((value) =>
         bigNumberishToNumber(value)
       ),
+      isClosed: project.isClosed,
     };
   });

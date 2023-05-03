@@ -1,15 +1,16 @@
 import React from "react";
 import { InputAdornment } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import { Button, FormControl, Grid } from "@mui/material";
 import { MobileDateTimePicker  } from "@mui/x-date-pickers/MobileDateTimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { Project } from "../types";
 
 interface FormProps {
-  onSubmit: (...args: unknown[]) => void;
+  onSubmit: (data: Project) => void;
 }
 
 const tomorrow = dayjs().add(1, "hour");
@@ -182,7 +183,7 @@ export const Form = ({ onSubmit }: FormProps) => {
         >
           <Button
             size="large"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit as SubmitHandler<FieldValues>)}
             variant="contained"
             sx={{
               bgcolor: "secondary.main",

@@ -7,7 +7,6 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
-import { useLogUser } from "../../hooks/useLogUser";
 import { showProfileModal } from "../../redux/modalsSlice";
 import { setSnackBar } from "../../redux/notificationsSlice";
 import { Severity } from "../../types";
@@ -16,7 +15,6 @@ import { UserAddress } from "../UserAddress";
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { login } = useLogUser();
 
   const loggedUser = useSelector(selectLoggedUser);
   const { address, balance } = loggedUser ?? {};
@@ -103,7 +101,6 @@ export const UserMenu = () => {
             onClose={handleClose}
           >
             <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-            <MenuItem onClick={login}>Relog</MenuItem>
             <MenuItem onClick={handleLogOutClick}>Log out</MenuItem>
           </Menu>
         </div>

@@ -2,7 +2,6 @@ import React from "react";
 import { Locations, Project } from "../../../types";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { ProgressBar } from "../projects/ProgressBar";
-import { getDaysLeft } from "../../../utils/getDaysLeft";
 import { NumberCard } from "../../NumberCard";
 import { FundBox } from "../../FundBox";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -11,16 +10,19 @@ import IconButton from "@mui/material/IconButton";
 import metamaskLogo from "../../../assets/metamask.png";
 import { ListItem } from "../../ListItem";
 import { UserAddress } from "../../UserAddress";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import dayjs from "dayjs";
+import { selectLoggedUser } from "../../../redux/loggedUserSlice";
+import { useContractContext } from "../../context/ContractContext";
 
 interface ProjectDetailProps {
   project: Project;
 }
 
-export const ProjectDetail = ({
-  project: {
+export const ProjectDetail = ({ project }: ProjectDetailProps) => {
+  const dispatch = useDispatch();
+  const {
     id,
     title,
     currentValue,
@@ -31,9 +33,14 @@ export const ProjectDetail = ({
     owner,
     investors,
     investments,
-  },
-}: ProjectDetailProps) => {
-  const dispatch = useDispatch();
+    isClosed
+  } = project;
+  const { address } = useSelector(selectLoggedUser) ?? {};
+  const { contract } = useContractContext();
+
+  const handleClickCloseProjectButton = async () => {
+    await contract?.closeProject(id);
+  };
 
   return (
     <Grid container position="relative">
@@ -47,6 +54,24 @@ export const ProjectDetail = ({
       >
         Back to projects
       </Button>
+      {owner === address && new Date(deadline) < new Date() && !isClosed && (
+        <Button
+          variant="contained"
+          sx={{
+            bgcolor: "red",
+            color: "primary.main",
+            "&:hover": {
+              bgcolor: "primary.main",
+              color: "secondary.main",
+            },
+            position: "absolute",
+            right: 0,
+          }}
+          onClick={handleClickCloseProjectButton}
+        >
+          Close and process investments
+        </Button>
+      )}
       <Grid item xs={12} mb={2} mt={-1} textAlign="center">
         <Typography variant="h4" fontWeight="bold" color="secondary.main">
           {title}
@@ -144,7 +169,7 @@ export const ProjectDetail = ({
         </ListItem>
       </Grid>
       <Grid item xs={5} mt={4}>
-        <FundBox projectId={id} />
+        <FundBox project={project} />
       </Grid>
     </Grid>
   );

@@ -2,14 +2,20 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Typography } from "@mui/material";
+import { useLogUser } from "../../hooks/useLogUser";
 
 interface MetaMaskCheckerProps {
   children: React.ReactNode;
 }
 
 export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
+  const { login } = useLogUser();
   const isInstalled =
     (window as any).ethereum && (window as any).ethereum.isMetaMask;
+
+  (window as any).ethereum.on("accountsChanged", function () {
+    login();
+  });
 
   return isInstalled ? (
     (children as JSX.Element)

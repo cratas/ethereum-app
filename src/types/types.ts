@@ -16,5 +16,6 @@ export type Project = {
   currentValue: number;
   image: string;
   investors: string[],
-  investments: number[]
+  investments: number[];
+  isClosed: boolean;
 };

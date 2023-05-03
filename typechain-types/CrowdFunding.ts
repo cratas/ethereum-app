@@ -35,6 +35,7 @@ export declare namespace CrowdFunding {
     image: PromiseOrValue<string>;
     investors: PromiseOrValue<string>[];
     investments: PromiseOrValue<BigNumberish>[];
+    isClosed: PromiseOrValue<boolean>;
   };
 
   export type ProjectStructOutput = [
@@ -46,7 +47,8 @@ export declare namespace CrowdFunding {
     BigNumber,
     string,
     string[],
-    BigNumber[]
+    BigNumber[],
+    boolean
   ] & {
     owner: string;
     title: string;
@@ -57,11 +59,13 @@ export declare namespace CrowdFunding {
     image: string;
     investors: string[];
     investments: BigNumber[];
+    isClosed: boolean;
   };
 }
 
 export interface CrowdFundingInterface extends utils.Interface {
   functions: {
+    "closeProject(uint256)": FunctionFragment;
     "createProject(address,string,string,uint256,uint256,string)": FunctionFragment;
     "getBalance()": FunctionFragment;
     "getInvestors(uint256)": FunctionFragment;
@@ -73,6 +77,7 @@ export interface CrowdFundingInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "closeProject"
       | "createProject"
       | "getBalance"
       | "getInvestors"
@@ -82,6 +87,10 @@ export interface CrowdFundingInterface extends utils.Interface {
       | "projects"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "closeProject",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "createProject",
     values: [
@@ -118,6 +127,10 @@ export interface CrowdFundingInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "closeProject",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "createProject",
     data: BytesLike
@@ -171,6 +184,11 @@ export interface CrowdFunding extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    closeProject(
+      projectId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     createProject(
       _owner: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
@@ -203,7 +221,16 @@ export interface CrowdFunding extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+      [
+        string,
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        string,
+        boolean
+      ] & {
         owner: string;
         title: string;
         description: string;
@@ -211,9 +238,15 @@ export interface CrowdFunding extends BaseContract {
         goal: BigNumber;
         currentValue: BigNumber;
         image: string;
+        isClosed: boolean;
       }
     >;
   };
+
+  closeProject(
+    projectId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   createProject(
     _owner: PromiseOrValue<string>,
@@ -247,7 +280,16 @@ export interface CrowdFunding extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+    [
+      string,
+      string,
+      string,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      string,
+      boolean
+    ] & {
       owner: string;
       title: string;
       description: string;
@@ -255,10 +297,16 @@ export interface CrowdFunding extends BaseContract {
       goal: BigNumber;
       currentValue: BigNumber;
       image: string;
+      isClosed: boolean;
     }
   >;
 
   callStatic: {
+    closeProject(
+      projectId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     createProject(
       _owner: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
@@ -291,7 +339,16 @@ export interface CrowdFunding extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, BigNumber, BigNumber, BigNumber, string] & {
+      [
+        string,
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        string,
+        boolean
+      ] & {
         owner: string;
         title: string;
         description: string;
@@ -299,6 +356,7 @@ export interface CrowdFunding extends BaseContract {
         goal: BigNumber;
         currentValue: BigNumber;
         image: string;
+        isClosed: boolean;
       }
     >;
   };
@@ -306,6 +364,11 @@ export interface CrowdFunding extends BaseContract {
   filters: {};
 
   estimateGas: {
+    closeProject(
+      projectId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     createProject(
       _owner: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,
@@ -339,6 +402,11 @@ export interface CrowdFunding extends BaseContract {
   };
 
   populateTransaction: {
+    closeProject(
+      projectId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     createProject(
       _owner: PromiseOrValue<string>,
       _title: PromiseOrValue<string>,

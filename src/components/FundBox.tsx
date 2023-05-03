@@ -4,11 +4,13 @@ import { InputAdornment } from "@mui/material";
 import { useContractContext } from "./context/ContractContext";
 import { useDispatch } from "react-redux";
 import { setSnackBar } from "../redux/notificationsSlice";
-import { Locations, Severity } from "../types";
+import { Locations, Project, Severity } from "../types";
 import { numberToBigInt } from "../utils/numberToBigInt";
 import { setCurrentLocation } from "../redux/currentLocationSlice";
 
-export const FundBox = ({ projectId }: { projectId: number }) => {
+export const FundBox = ({ project }: { project: Project }) => {
+  const { id, deadline } = project;
+
   const [fundValue, setFundValue] = useState<string>();
   const { contract } = useContractContext();
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ export const FundBox = ({ projectId }: { projectId: number }) => {
   const handleButtonClick = async () => {
     if (fundValue) {
       try {
-        const tx = await contract?.investToProject(projectId, {
+        const tx = await contract?.investToProject(id, {
           value: numberToBigInt(fundValue),
         });
 
@@ -34,9 +36,8 @@ export const FundBox = ({ projectId }: { projectId: number }) => {
             msg: "Successfully invested into project.",
           })
         );
-        dispatch(setCurrentLocation({location: Locations.PROJECTS}));
+        dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
       } catch (error) {
-        console.log(error);
         dispatch(
           setSnackBar({
             severity: Severity.ERROR,
@@ -73,6 +74,7 @@ export const FundBox = ({ projectId }: { projectId: number }) => {
 
       <TextField
         variant="outlined"
+        disabled={new Date(deadline) < new Date()}
         fullWidth
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*", min: 0 }}
         value={fundValue || ""}
@@ -104,6 +106,7 @@ export const FundBox = ({ projectId }: { projectId: number }) => {
 
       <Button
         size="large"
+        disabled={new Date(deadline) < new Date()}
         variant="contained"
         onClick={handleButtonClick}
         sx={{
