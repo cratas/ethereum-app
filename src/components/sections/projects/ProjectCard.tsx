@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import { Locations, Project } from "../../../types";
 import { getDaysTo } from "../../../utils/getDaysTo";
+import { calcProgressStatus } from "../../../utils/calcProgressStatus";
+
 
 interface ProjectCardProps {
   project: Project;
@@ -27,7 +29,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         dispatch(
           setCurrentLocation({
             location: Locations.PROJECT_DETAIL,
-            props: { ...project, deadline: project.deadline.toISOString() },
+            props: { ...project, deadline: new Date(project.deadline).toISOString() },
           })
         )
       }
@@ -114,7 +116,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             </Box>
           </Box>
 
-          <ProgressBar value={(currentValue / goal) * 100} />
+          <ProgressBar value={calcProgressStatus(currentValue, goal)} />
         </CardContent>
       </CardActionArea>
     </Card>

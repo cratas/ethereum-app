@@ -30,14 +30,15 @@ export const ContractContextProvider = ({
   const createProject = async (data: Project) => {
     const { title, description, goal, deadline, image } = data;
 
-    const convertedDate = String(new Date(deadline).getTime());
+    const convertedDate = numberToBigInt(deadline.getTime());
+    const convertedGoal = numberToBigInt(goal.toString());
 
     await contract.createProject(
       user.getAddress(),
       title,
       description,
-      numberToBigInt(convertedDate),
-      numberToBigInt(goal.toString()),
+      convertedDate,
+      convertedGoal,
       image
     );
   };

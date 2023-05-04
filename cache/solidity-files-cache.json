@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\petr.kratochvil\\Desktop\\School\\BDM\\ethereum-app\\contracts\\CrowdFunding.sol": {
-      "lastModificationDate": 1683141781306,
-      "contentHash": "294e80062fb79c8e20c1f562fefa0882",
+      "lastModificationDate": 1683202876566,
+      "contentHash": "72840f1f8b2c5ab789203112d26507c1",
       "sourceName": "contracts/CrowdFunding.sol",
       "solcConfig": {
         "version": "0.8.18",

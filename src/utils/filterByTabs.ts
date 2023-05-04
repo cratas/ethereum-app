@@ -6,6 +6,8 @@ export const filterByTabs = (
   currentUser?: string
 ) => {
   switch (mode) {
+    case 0:
+      return true;
     case 1:
       return true;
     case 3:

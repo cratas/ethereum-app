@@ -1,5 +1,5 @@
 import React from "react";
-import LogInButton from "../LogInButton";
+import { LogInButton } from "../LogInButton";
 import { Box } from "@mui/system";
 import logo from "../../assets/ethereum-network.png";
 import Grid from "@mui/material/Grid";
@@ -22,7 +22,6 @@ const levitate = keyframes`
 const LevitatingImage = styled.img`
   animation: ${levitate} 2s ease-in-out infinite;
 `;
-
 
 export const Unauthorized = () => {
   return (
@@ -48,7 +47,7 @@ export const Unauthorized = () => {
             gap: 5,
             ml: 2,
             pr: 5,
-            mt: 1
+            mt: 1,
           }}
         >
           <Typography sx={{ color: "secondary.main" }} variant="h2">

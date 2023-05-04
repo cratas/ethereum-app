@@ -11,6 +11,7 @@ import { showProfileModal } from "../../redux/modalsSlice";
 import { setSnackBar } from "../../redux/notificationsSlice";
 import { Severity } from "../../types";
 import { UserAddress } from "../UserAddress";
+import { useContractContext } from "../context/ContractContext";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -84,7 +85,6 @@ export const UserMenu = () => {
               <img src={metamaskLogo} alt="Logo" width={30} />
             </IconButton>
           </Box>
-
           <Menu
             id="menu-appbar"
             anchorEl={anchorEl}

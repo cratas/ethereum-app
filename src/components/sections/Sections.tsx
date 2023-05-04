@@ -14,7 +14,6 @@ export const Sections = () => {
   const { location, props } = useSelector(selectCurrentLocation);
   const loggedUser = useSelector(selectLoggedUser);
 
-
   return loggedUser ? (
     <Box
       sx={{

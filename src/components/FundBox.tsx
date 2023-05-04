@@ -4,12 +4,13 @@ import { InputAdornment } from "@mui/material";
 import { useContractContext } from "./context/ContractContext";
 import { useDispatch } from "react-redux";
 import { setSnackBar } from "../redux/notificationsSlice";
-import { Locations, Project, Severity } from "../types";
+import { Project, Severity } from "../types";
 import { numberToBigInt } from "../utils/numberToBigInt";
-import { setCurrentLocation } from "../redux/currentLocationSlice";
+import { useLogUser } from "../hooks/useLogUser";
 
 export const FundBox = ({ project }: { project: Project }) => {
   const { id, deadline } = project;
+  const {login} = useLogUser();
 
   const [fundValue, setFundValue] = useState<string>();
   const { contract } = useContractContext();
@@ -36,7 +37,8 @@ export const FundBox = ({ project }: { project: Project }) => {
             msg: "Successfully invested into project.",
           })
         );
-        dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
+
+        await login(false);
       } catch (error) {
         dispatch(
           setSnackBar({

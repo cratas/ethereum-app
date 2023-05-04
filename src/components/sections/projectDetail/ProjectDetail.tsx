@@ -15,6 +15,8 @@ import { setCurrentLocation } from "../../../redux/currentLocationSlice";
 import dayjs from "dayjs";
 import { selectLoggedUser } from "../../../redux/loggedUserSlice";
 import { useContractContext } from "../../context/ContractContext";
+import { calcProgressStatus } from "../../../utils/calcProgressStatus";
+import { CrowdFunding } from "../../../../typechain-types";
 
 interface ProjectDetailProps {
   project: Project;
@@ -39,7 +41,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
   const { contract } = useContractContext();
 
   const handleClickCloseProjectButton = async () => {
-    await contract?.closeProject(id);
+    await (contract as CrowdFunding).closeProject(id)
   };
 
   return (
@@ -91,7 +93,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             }}
           />
         </Paper>
-        <ProgressBar value={(currentValue / goal) * 100} />
+        <ProgressBar value={calcProgressStatus(currentValue, goal)} />
       </Grid>
       <Grid container item xs={2} pl={2} gap={2}>
         <NumberCard

@@ -2,8 +2,12 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useLogUser } from "../hooks/useLogUser";
 
-const LogInButton = () => {
+export const LogInButton = () => {
   const { login } = useLogUser();
+
+  const handleButtonClick = async () => {
+    await login();
+  };
 
   return (
     <Button
@@ -16,11 +20,9 @@ const LogInButton = () => {
           color: "secondary.main",
         },
       }}
-      onClick={login}
+      onClick={handleButtonClick}
     >
       Log In
     </Button>
   );
 };
-
-export default LogInButton;

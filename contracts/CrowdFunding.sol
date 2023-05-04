@@ -45,29 +45,33 @@ contract CrowdFunding {
         project.currentValue = 0;
         project.image = _image;
         project.isClosed = false;
-        
+
         numberOfProjects++;
 
         return numberOfProjects - 1;
     }
 
-function closeProject(uint256 projectId) public {
-    Project storage project = projects[projectId];
-    require(project.owner == msg.sender, "Only project owner can close the project");
-    require(!project.isClosed, "Project is already closed");
+    function closeProject(uint256 projectId) public payable {
+        Project storage project = projects[projectId];
+        require(
+            project.owner == msg.sender,
+            "Only project owner can close the project"
+        );
+        require(!project.isClosed, "Project is already closed");
+        bool processed = false;
 
-    if (project.deadline <= block.timestamp) {
         if (project.currentValue >= project.goal) {
             payable(project.owner).transfer(project.currentValue);
+            processed = true;
         } else {
             for (uint256 j = 0; j < project.investors.length; j++) {
                 payable(project.investors[j]).transfer(project.investments[j]);
             }
+            processed = true;
         }
+        
+        project.isClosed = processed;
     }
-    
-    project.isClosed = true;
-}
 
     function investToProject(uint256 _id) public payable {
         uint256 amount = msg.value;

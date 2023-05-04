@@ -11,7 +11,7 @@ export const useLogUser = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  const login = async () => {
+  const login = async (showNotification = true) => {
     setIsLoading(true);
     try {
       (window as any).ethereum.enable();
@@ -40,12 +40,15 @@ export const useLogUser = () => {
         })
       );
       dispatch(setCurrentLocation({ location: Locations.PROJECTS }));
-      dispatch(
-        setSnackBar({
-          severity: "success",
-          msg: "Successfully logged in.",
-        })
-      );
+
+      if (showNotification) {
+        dispatch(
+          setSnackBar({
+            severity: "success",
+            msg: "Successfully logged in.",
+          })
+        );
+      }
     } catch (error) {
       dispatch(
         setSnackBar({

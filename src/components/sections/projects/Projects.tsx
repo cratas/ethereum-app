@@ -9,6 +9,7 @@ import { convertProjectData } from "../../../utils/convertProjectData";
 import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../../redux/loggedUserSlice";
 import { filterByTabs } from "../../../utils/filterByTabs";
+import { bigNumberishToNumber } from "../../../utils/bigIntToNumber";
 
 export const Projects = () => {
   const [currentSearch, setCurrentSearch] = useState<string>("");
@@ -40,12 +41,12 @@ export const Projects = () => {
   const calculateData = useMemo(
     () =>
       originalProjects
-        .filter((item: Project) => filterByTabs(item, filterMode, address))
         .filter(
           (item: Project) =>
-            !currentSearch ||
-            item.title.toLowerCase().includes(currentSearch) ||
-            item.owner.toLowerCase() === currentSearch.toLowerCase()
+            filterByTabs(item, filterMode, address) &&
+            (!currentSearch ||
+              item.owner === currentSearch ||
+              item.title.toLowerCase().includes(currentSearch))
         ),
     [currentSearch, filterMode]
   );

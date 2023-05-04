@@ -186,7 +186,7 @@ export interface CrowdFunding extends BaseContract {
   functions: {
     closeProject(
       projectId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createProject(
@@ -245,7 +245,7 @@ export interface CrowdFunding extends BaseContract {
 
   closeProject(
     projectId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createProject(
@@ -366,7 +366,7 @@ export interface CrowdFunding extends BaseContract {
   estimateGas: {
     closeProject(
       projectId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createProject(
@@ -404,7 +404,7 @@ export interface CrowdFunding extends BaseContract {
   populateTransaction: {
     closeProject(
       projectId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createProject(

@@ -16,6 +16,7 @@ export const CreateProject = () => {
   const handleFormSubmit = async (data: Project) => {
     const newProject = {
       ...data,
+      deadline: new Date(data.deadline),
       image:
         "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
     };
