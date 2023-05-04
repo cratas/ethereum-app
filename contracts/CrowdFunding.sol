@@ -22,6 +22,8 @@ contract CrowdFunding {
 
     uint256 public numberOfProjects = 0;
 
+    event ProjectClosed(uint256 projectId);
+
     function createProject(
         address _owner,
         string memory _title,
@@ -71,6 +73,7 @@ contract CrowdFunding {
         }
         
         project.isClosed = processed;
+        emit ProjectClosed(projectId);
     }
 
     function investToProject(uint256 _id) public payable {

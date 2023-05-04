@@ -32,18 +32,16 @@ export const Notification = ({
     }
   };
 
-  return (
-    msg && (
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        autoHideDuration={3000}
-        open={open}
-        onClose={handleClose}
-      >
-        <Alert severity={severity} sx={{ width: "100%" }} onClose={handleClose}>
-          {msg}
-        </Alert>
-      </Snackbar>
-    )
-  );
+  return msg ? (
+    <Snackbar
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      autoHideDuration={3000}
+      open={open}
+      onClose={handleClose}
+    >
+      <Alert severity={severity} sx={{ width: "100%" }} onClose={handleClose}>
+        {msg}
+      </Alert>
+    </Snackbar>
+  ) : null;
 };

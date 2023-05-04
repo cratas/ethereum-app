@@ -1,7 +1,6 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { LogoIcon } from "./LogoIcon";
-import { Button } from "@mui/material";
 import { Links } from "./Links";
 import { UserMenu } from "./UserMenu";
 

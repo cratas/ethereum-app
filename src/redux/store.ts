@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import currentThemeSlice, { name as currentThemeName } from "./loggedUserSlice";
 import modalsSlice, { name as modalSliceName } from "./modalsSlice";
 import notificationsSlice, {

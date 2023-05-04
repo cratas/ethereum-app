@@ -9,7 +9,6 @@ import { convertProjectData } from "../../../utils/convertProjectData";
 import { useSelector } from "react-redux";
 import { selectLoggedUser } from "../../../redux/loggedUserSlice";
 import { filterByTabs } from "../../../utils/filterByTabs";
-import { bigNumberishToNumber } from "../../../utils/bigIntToNumber";
 
 export const Projects = () => {
   const [currentSearch, setCurrentSearch] = useState<string>("");

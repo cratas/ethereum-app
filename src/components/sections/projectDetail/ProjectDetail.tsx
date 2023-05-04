@@ -35,13 +35,13 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
     owner,
     investors,
     investments,
-    isClosed
+    isClosed,
   } = project;
   const { address } = useSelector(selectLoggedUser) ?? {};
   const { contract } = useContractContext();
 
   const handleClickCloseProjectButton = async () => {
-    await (contract as CrowdFunding).closeProject(id)
+    await (contract as CrowdFunding).closeProject(id);
   };
 
   return (

@@ -2,7 +2,6 @@ import React, { createContext, useContext } from "react";
 import { CrowdFunding } from "../../../typechain-types";
 import { Contract, ethers } from "ethers";
 import { abi } from "../../../artifacts/contracts/CrowdFunding.sol/CrowdFunding.json";
-
 import { address } from "../../../contract.json";
 import { Project } from "../../types";
 import { numberToBigInt } from "../../utils/numberToBigInt";

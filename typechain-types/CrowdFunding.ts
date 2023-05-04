@@ -14,7 +14,11 @@ import type {
   Signer,
   utils,
 } from "ethers";
-import type { FunctionFragment, Result } from "@ethersproject/abi";
+import type {
+  FunctionFragment,
+  Result,
+  EventFragment,
+} from "@ethersproject/abi";
 import type { Listener, Provider } from "@ethersproject/providers";
 import type {
   TypedEventFilter,
@@ -154,8 +158,22 @@ export interface CrowdFundingInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "projects", data: BytesLike): Result;
 
-  events: {};
+  events: {
+    "ProjectClosed(uint256)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "ProjectClosed"): EventFragment;
 }
+
+export interface ProjectClosedEventObject {
+  projectId: BigNumber;
+}
+export type ProjectClosedEvent = TypedEvent<
+  [BigNumber],
+  ProjectClosedEventObject
+>;
+
+export type ProjectClosedEventFilter = TypedEventFilter<ProjectClosedEvent>;
 
 export interface CrowdFunding extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -361,7 +379,10 @@ export interface CrowdFunding extends BaseContract {
     >;
   };
 
-  filters: {};
+  filters: {
+    "ProjectClosed(uint256)"(projectId?: null): ProjectClosedEventFilter;
+    ProjectClosed(projectId?: null): ProjectClosedEventFilter;
+  };
 
   estimateGas: {
     closeProject(

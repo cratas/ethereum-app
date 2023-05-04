@@ -29,7 +29,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         dispatch(
           setCurrentLocation({
             location: Locations.PROJECT_DETAIL,
-            props: { ...project, deadline: new Date(project.deadline).toISOString() },
+            props: { ...project, deadline: project.deadline.toISOString() },
           })
         )
       }

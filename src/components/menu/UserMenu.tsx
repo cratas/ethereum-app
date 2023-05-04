@@ -11,7 +11,6 @@ import { showProfileModal } from "../../redux/modalsSlice";
 import { setSnackBar } from "../../redux/notificationsSlice";
 import { Severity } from "../../types";
 import { UserAddress } from "../UserAddress";
-import { useContractContext } from "../context/ContractContext";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
