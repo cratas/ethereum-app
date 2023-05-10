@@ -13,7 +13,7 @@ export const MetaMaskChecker = ({ children }: MetaMaskCheckerProps) => {
   const isInstalled =
     (window as any).ethereum && (window as any).ethereum.isMetaMask;
 
-  (window as any).ethereum.on("accountsChanged", function () {
+  (window as any).ethereum?.on("accountsChanged", function () {
     login();
   });
 

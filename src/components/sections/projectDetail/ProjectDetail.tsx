@@ -17,6 +17,7 @@ import { selectLoggedUser } from "../../../redux/loggedUserSlice";
 import { useContractContext } from "../../context/ContractContext";
 import { calcProgressStatus } from "../../../utils/calcProgressStatus";
 import { CrowdFunding } from "../../../../typechain-types";
+import { useLogUser } from "../../../hooks/useLogUser";
 
 interface ProjectDetailProps {
   project: Project;
@@ -39,9 +40,11 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
   } = project;
   const { address } = useSelector(selectLoggedUser) ?? {};
   const { contract } = useContractContext();
+  const { login } = useLogUser();
 
   const handleClickCloseProjectButton = async () => {
     await (contract as CrowdFunding).closeProject(id);
+    login(false);
   };
 
   return (

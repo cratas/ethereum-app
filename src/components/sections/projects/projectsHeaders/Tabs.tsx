@@ -41,7 +41,7 @@ export const Tabs = ({ onSortItems, onFilterModeChange }: TabProps) => {
         <CustomDivider />
         <CustomTab label="Completed" {...a11yProps(2)} />
         <CustomDivider />
-        <CustomTab label="Unsuccessfully completed" {...a11yProps(3)} />
+        <CustomTab label="Unsuccessfully ended" {...a11yProps(3)} />
       </TabsMUI>
     </Box>
   );

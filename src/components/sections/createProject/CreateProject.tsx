@@ -18,7 +18,9 @@ export const CreateProject = () => {
       ...data,
       deadline: new Date(data.deadline),
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
+        !(data.image.length > 1)
+          ? "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930"
+          : data.image,
     };
 
     try {
